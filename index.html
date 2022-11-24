@@ -62,13 +62,10 @@
 <body>
     <link href="css/style_fonte.css" rel="stylesheet">
     <div id="inicio">
-        <h2 id="titulo">Cadastrar</h2>
+        <h2 id="titulo">TO DO LIST</h2>
 
-        <input type="text" id="texto" class="input" placeholder="Nome">
-        <input type="text" id="texto" class="input" placeholder="Usuario">
-        <input type="text" id="texto" class="input" placeholder="Email">
-        <input type="text" id="texto" class="input" placeholder="Senha">
-        <button onclick="adicionar();" id="botao">Cadastrar </button>
+        <input type="text" id="texto" class="input" placeholder="Eu preciso.....">
+        <button onclick="adicionar();" id="botao">Adicionar tarefa </button>
 
     </div>
 
@@ -80,6 +77,64 @@
 
     <script>
 
+        function adicionar() {
+            var cont=1;
+            var conteudo = document.getElementById("texto").value;
+            if(conteudo!=""){
+            var novoelemento = document.createTextNode(conteudo);
+            var divNova = document.createElement('div');
+            divNova.className = 'itens';
+            var botao = document.createElement('button');
+            var botaoeditar = document.createElement('button');
+            var check = document.createElement('input');
+            check.setAttribute("type", "checkbox");
+            botao.innerHTML = "X";
+            botaoeditar.innerHTML = "Recriar";
+
+            botaoeditar.addEventListener("click", function () {
+                document.getElementById('texto').value = conteudo;
+
+                divNova.remove();
+
+            })
+            botao.addEventListener("click", function () {
+                divNova.remove();
+
+            })
+
+            divNova.appendChild(check);
+            divNova.appendChild(novoelemento);
+            divNova.appendChild(botaoeditar);
+            divNova.appendChild(botao);
+            document.getElementById('tarefas').appendChild(divNova);
+
+
+
+            document.getElementById("texto").value = "";
+            botaoeditar.style.borderRadius = "10px";
+            botaoeditar.style.backgroundColor = "blue";
+            botao.style.borderRadius = "10px";
+            botao.style.backgroundColor = "red";
+            botaoeditar.style.color = "white";
+
+            check.addEventListener("change", function () {
+
+                if (cont==1){
+                divNova.style.backgroundColor="Green";
+                cont=2;
+                }
+                else if (cont==2){
+                divNova.style.backgroundColor="blue" ;
+                cont=1;
+                }
+
+
+            })
+
+
+        }
+
+    }
 
     </script>
 </body>
