@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      
+        #inicio {
+            background-color: rgb(3, 15, 126);
+            text-align: center;
+        }
+        #titulo {
+            text-align: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: whitesmoke;
+          
+        }
+        #input {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        #tarefas {
+            background-color: blue;
+            color: white;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+        }
+        #botao {
+        border-radius: 10px;
+         width: 20%;
+	     padding: 4px;
+            background-color: rgb(9, 178, 184);
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+       
+        }
+        .itens {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            padding: 10px; 
+        }
+        .input {
+            width: 40%;
+            margin: 0 auto;
+            padding: 6px;
+            border: none;
+            margin-bottom: 10px;
+            border-radius: 50px;
+        }
+        .inicio{
+         display: none;
+        }
+       
+        #cadastro {
+            background-color: rgb(3, 15, 126);
+            text-align: center;
+        }
+        .cad {
+            text-align: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: whitesmoke;
+          
+        }
+    </style>
+</head>
+<body>
+    <link href="css/style_fonte.css" rel="stylesheet">
+    <div id="cadastro" class="cadastro">
+        <h2 id="cad" class="cad">Cadastrar</h2>
+
+        <input type="text" id="nome" class="input" name="nome" placeholder="Nome">
+        <input type="text" id="usuario" class="input" name="usuario" placeholder="Usuario">
+        <input type="text" id="usuario" class="input" name="usuario" placeholder="Usuário">
+        <form method="post" action="" name="frmEnvia">
+        <input type="text" id="email" class="input" name="email" placeholder="Email">
+    </form>
+        <input type="text" id="senha" class="input" name="senha" placeholder="Senha">
+        <input type="text" id="confirm" class="input" name="confirm" placeholder="Confirmar senha">
+        <button onclick="cadastrar();" id="botao">Cadastrar </button>
+</div>
+    <div id="inicio" class="inicio">
+        
+        <h2 id="titulo">TO DO LIST</h2>
+        <input type="text" id="texto" class="input" placeholder="Eu preciso.....">
+        <button onclick="adicionar();" id="botao">Adicionar tarefa </button>
+        <button onclick="mostrar();" id="botao">Mostrar dados</button>
+    </div>
+<div id="login">
+</div>
+    <div id="tarefas" class="inicio">
+        <br>
+    </div>
+    <script>
+        function cadastrar() {
+const nome = document.getElementById("nome").value;
+const usuario = document.getElementById("usuario").value;
+const email = document.getElementById("email").value;
+const senha = document.getElementById("senha").value;
+const confirm = document.getElementById("confirm").value;
+if(nome==""){
+alert("Informe o seu nome"); 
+}
+else if(usuario==""){
+alert("Informe um usuario"); 
+}
+else if(email==""){
+alert("Informe um email"); 
+}
+else if(senha==""){
+alert("Informe uma senha"); 
+}
+else if(confirm==""){
+alert("Confirme sua senha"); 
+}
+else if(senha!=confirm){
+alert("senhas diferentes"); 
+}
+else if(usuario.length >10){
+alert("Usuário deve possuir menos que 10 caracteres"); 
+}
+else if(nome.length <=10){
+alert("O nome deve ser maior que 10 letras"); 
+}
+else if( document.forms[0].email.value.indexOf('@')==-1 
+     || document.forms[0].email.value.indexOf('.com')==-1 )
+	{
+	  alert( "Por favor, informe um E-MAIL válido!" );
+	}
+else {
+var cadastro = document.getElementById("cadastro");
+cadastro.style.display = "none";
+var inicio = document.getElementById("inicio");
+inicio.style.display = "block";
+var divtarefa = document.getElementById("tarefas");
+
+tarefas.style.display = "block";
+
+}
+
+  
+    
+    }
+    function mostrar(){
+        var paragrafo = document.createElement('div');
+        paragrafo.innerHTML = "O nome é: " + document.getElementsByTagName('input')[0].value +"<br>"+
+            "O usuário é: " + document.getElementsByTagName('input')[1].value +"<br>" +
+            "O email é: " + document.getElementsByTagName('input')[2].value ;
+            var login = document.getElementById("login");
+             login.appendChild(paragrafo);
+             login.style.display = "block";
+             login.style.backgroundColor="blue";
+            paragrafo.style.backgroundColor="blue";
+            document.getElementsByTagName("button")[2].style.display = "none";
+    }
+        function adicionar() {
+            var cont=1;
+            var conteudo = document.getElementById("texto").value;
+            if(conteudo!=""){
+            var novoelemento = document.createTextNode(conteudo);
+            var divNova = document.createElement('div');
+            divNova.className = 'itens';
+            var botao = document.createElement('button');
+            var botaoeditar = document.createElement('button');
+            var check = document.createElement('input');
+            check.setAttribute("type", "checkbox");
+            botao.innerHTML = "X";
+            botaoeditar.innerHTML = "Recriar";
+           
+    
+            botaoeditar.addEventListener("click", function () {
+                document.getElementById('texto').value = conteudo;
+                divNova.remove();
+            })
+            botao.addEventListener("click", function () {
+                divNova.remove();
+            })
+            
+            
+           
+           
+            
+            
+             divNova.appendChild(check);
+            divNova.appendChild(novoelemento);
+            divNova.appendChild(botaoeditar);
+            divNova.appendChild(botao);
+            document.getElementById('tarefas').appendChild(divNova);
+            document.getElementById("texto").value = "";
+            botaoeditar.style.borderRadius = "10px";
+            botaoeditar.style.backgroundColor = "blue";
+            botao.style.borderRadius = "10px";
+            botao.style.backgroundColor = "red";
+            botaoeditar.style.color = "white";
+            
+            check.addEventListener("change", function () {
+                
+                if (cont==1){
+                divNova.style.backgroundColor="Green";
+                cont=2;
+                }
+                else if (cont==2){
+                divNova.style.backgroundColor="blue" ;
+                cont=1;
+                }
+               
+                
+            })
+        }
+    }
+               
+    </script>
+</body>
+</html>
